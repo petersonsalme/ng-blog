@@ -1,1 +1,17 @@
-<p>article-list works!</p>
+<div *ngFor="let a of articles">
+  <div class="card">
+    <div class="card-body">
+      <div>
+        <img [src]="a.imageUrl" />
+      </div>
+      <div>
+        <h3>
+          {{ a.title }}
+        </h3>
+        <div class="meta-info">{{ a.date.toDateString() }}</div>
+        <p [innerHTML]="a.description"></p>
+        <a routerLink="/{{a.key}}" class="continue-reading">Continue reading...</a>
+      </div>
+    </div>
+  </div>
+</div>
