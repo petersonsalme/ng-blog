@@ -1,13 +1,12 @@
-const ARTICLES = require('./mock-articles.js');
+module.exports = (app, sequelize) => {
 
-module.exports = (app) => {
-
-    app.get('/articles', (req, res) => {
-        res.send(ARTICLES);
+    app.get('/articles', async (req, res) => {
+        res.send( await sequelize.getArticles() );
     });
 
-    app.get('/articles/:key', (req, res) => {
-        res.send(ARTICLES.filter(a => a.key === req.params.key)[0]);
+    app.get('/articles/:key', async (req, res) => {
+        const { key } = req.params;
+        res.send( await sequelize.getArticleByKey({ key }) );
     });
 
 };
