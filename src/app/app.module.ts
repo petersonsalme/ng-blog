@@ -10,6 +10,9 @@ import { AboutComponent } from './about/about.component';
 import { ArticleComponent } from './article/article.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ArticleOverviewComponent } from './dashboard/article-overview/article-overview.component';
+import { EditArticleComponent } from './dashboard/edit-article/edit-article.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
     AboutComponent,
     ArticleComponent,
     NotFoundComponent,
+    DashboardComponent,
+    ArticleOverviewComponent,
+    EditArticleComponent
    ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
