@@ -15,4 +15,8 @@ export class DashboardService {
     return this.http.get<Article[]>(environment.apiUrl + '/dashboard/overview');
   }
 
+  togglePublishState(article: Article): Observable<Article> {
+    return this.http.post<Article>(environment.apiUrl + '/dashboard/article/publish', article);
+  }
+
 }
