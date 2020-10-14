@@ -19,4 +19,12 @@ export class DashboardService {
     return this.http.post<Article>(environment.apiUrl + '/dashboard/article/publish', article);
   }
 
+  getArticle(key: string): Observable<Article> {
+    return this.http.get<Article>(environment.apiUrl + '/dashboard/article/' + key);
+  }
+
+  updateArticle(article: Article): Observable<Article> {
+    return this.http.put<Article>(environment.apiUrl + '/dashboard/article', article);
+  }
+
 }
