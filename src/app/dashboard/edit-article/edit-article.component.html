@@ -24,9 +24,10 @@
     <textarea type="text" [(ngModel)]="article.content"></textarea>
   </div>
   <div>
-    <button (click)="deleteArticle()" style="margin-right: 10px; color: red;">Delete</button>
-    <button (click)="viewPreview()" style="margin-right: 10px;">Preview</button>
-    <button (click)="updateArticle()">Update</button>
+    <button (click)="deleteArticle()" *ngIf="!isNew" style="margin-right: 10px; color: red;">Delete</button>
+    <button (click)="viewPreview()" *ngIf="!isNew" style="margin-right: 10px;">Preview</button>
+    <button (click)="updateArticle()" *ngIf="!isNew">Update</button>
+    <button (click)="createArticle()" *ngIf="isNew">Save as draft</button>
     <div *ngIf="saved" style="color: green">
       <span>Saved.</span> <a routerLink="../../{{article.key}}">View Article</a>
     </div>

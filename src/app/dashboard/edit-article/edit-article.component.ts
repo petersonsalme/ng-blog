@@ -11,7 +11,8 @@ import { DashboardService } from '../dashboard.service';
 export class EditArticleComponent implements OnInit {
 
   article: Article = null;
-  saved: boolean;
+  saved = false;
+  isNew = false;
 
   constructor(
     private dashboardService: DashboardService,
@@ -22,7 +23,15 @@ export class EditArticleComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const { key } = params;
-      this.getArticle(key);
+
+      if (key === 'new') {
+        this.article = new Article();
+        this.article.published = false;
+        this.isNew = true;
+      } else {
+        this.getArticle(key);
+      }
+
     });
   }
 
@@ -59,6 +68,15 @@ export class EditArticleComponent implements OnInit {
         err => alert(err.error.message)
       );
     }
+  }
+
+  createArticle(): void {
+    this.saved = false;
+    this.dashboardService.createArticle(this.article).subscribe(result => {
+      this.article = result;
+      this.saved = true;
+      this.isNew = false;
+    });
   }
 
 }
