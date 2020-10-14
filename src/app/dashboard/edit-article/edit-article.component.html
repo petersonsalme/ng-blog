@@ -24,6 +24,7 @@
     <textarea type="text" [(ngModel)]="article.content"></textarea>
   </div>
   <div>
+    <button (click)="deleteArticle()" style="margin-right: 10px; color: red;">Delete</button>
     <button (click)="viewPreview()" style="margin-right: 10px;">Preview</button>
     <button (click)="updateArticle()">Update</button>
     <div *ngIf="saved" style="color: green">

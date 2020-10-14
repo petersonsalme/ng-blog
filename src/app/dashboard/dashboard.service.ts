@@ -27,4 +27,8 @@ export class DashboardService {
     return this.http.put<Article>(environment.apiUrl + '/dashboard/article', article);
   }
 
+  deleteArticle(id: number): Observable<any> {
+    return this.http.delete<any>(environment.apiUrl + '/dashboard/article/' + id);
+  }
+
 }
