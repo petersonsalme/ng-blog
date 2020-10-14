@@ -146,3 +146,17 @@ module.exports.putDashboardArticle = async (req) => {
     return null;
   }
 };
+
+module.exports.deleteDashboardArticleById = async (req) => {
+  console.log('deleteDashboardArticleById(', req, ')');
+  try {
+    const article = await Article.findOne({ 
+      where: { id: req.id } 
+    });
+
+    return await article.destroy();
+  } catch (error) {
+    console.log('deleteDashboardArticleById(', req, ')', error);
+    return null;
+  }
+}; 

@@ -20,4 +20,14 @@ module.exports = (app, sequelize) => {
         res.send( await sequelize.putDashboardArticle({ id, article }) );
     });
 
+    app.delete('/dashboard/article/:id', async (req, res) => {
+        const { id } = req.params;
+
+        const result = await sequelize.deleteDashboardArticleById({ id });
+        if( !result ) {
+            res.status(404).send({ message: `Dashboard Article ${id} Not Found` });    
+            return;
+        }
+        res.status(204).send();
+    });
 };
