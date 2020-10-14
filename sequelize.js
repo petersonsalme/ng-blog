@@ -160,3 +160,20 @@ module.exports.deleteDashboardArticleById = async (req) => {
     return null;
   }
 }; 
+
+module.exports.createNewDashboardArticle = async (req) => {
+  console.log('createNewDashboardArticle(', req, ')');
+  try {
+    return Article.create({
+      title: req.article.title,
+      key: req.article.key,
+      date: req.article.date,
+      imageUrl: req.article.imageurl,
+      description: req.article.description,
+      content: req.article.content,
+    });
+  } catch (error) {
+    console.log('createNewDashboardArticle(', req, ')', error);
+    return null;
+  }
+}; 

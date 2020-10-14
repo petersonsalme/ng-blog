@@ -30,4 +30,9 @@ module.exports = (app, sequelize) => {
         }
         res.status(204).send();
     });
+
+    app.post('/dashboard/article', async (req, res) => {
+        const article = req.body;
+        res.send( await sequelize.createNewDashboardArticle({ article }) );
+    });
 };
