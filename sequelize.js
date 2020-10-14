@@ -109,3 +109,40 @@ module.exports.updateArticlePublishState = async (req) => {
     return null;
   }
 };
+
+module.exports.getDashboardArticleByKey = async (req) => {
+  console.log('getDashboardArticleByKey(', req, ')');
+  try {
+    return await Article.findOne({ 
+      where: { key: req.key } 
+    });
+  } catch (error) {
+    console.log('getDashboardArticleByKey(', req, ')', error);
+    return null;
+  }
+};
+
+module.exports.putDashboardArticle = async (req) => {
+  console.log('putDashboardArticle(', req, ')');
+  try {
+    const article = await Article.findOne({ 
+      where: { id: req.id } 
+    });
+
+    if (article) {
+      article.update({
+        title: req.article.title,
+        key: req.article.key,
+        date: req.article.date,
+        imageUrl: req.article.imageurl,
+        description: req.article.description,
+        content: req.article.content,
+      });
+    }
+
+    return article;
+  } catch (error) {
+    console.log('putDashboardArticle(', req, ')', error);
+    return null;
+  }
+};

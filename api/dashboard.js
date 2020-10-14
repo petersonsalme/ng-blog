@@ -9,4 +9,15 @@ module.exports = (app, sequelize) => {
         res.send( await sequelize.updateArticlePublishState({ id, published }) );
     });
 
+    app.get('/dashboard/article/:key', async (req, res) => {
+        const { key } = req.params;
+        res.send( await sequelize.getDashboardArticleByKey({ key }) );
+    });
+
+    app.put('/dashboard/article', async (req, res) => {
+        const { id } = req.body;
+        const article = req.body;
+        res.send( await sequelize.putDashboardArticle({ id, article }) );
+    });
+
 };
