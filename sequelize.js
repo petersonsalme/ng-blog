@@ -6,6 +6,12 @@ const sequelize = new Sequelize('ngblog', 'root', 'example', {
   port: 3306,
 });
 
+const User = sequelize.define('user', {
+  name: { type: Sequelize.STRING, allowNull: false },
+  password: { type: Sequelize.STRING, allowNull: false },
+  salt: { type: Sequelize.STRING, allowNull: false },
+});
+
 const Article = sequelize.define('article', {
   title: { type: Sequelize.STRING },
   key: { type: Sequelize.STRING },
@@ -45,6 +51,7 @@ module.exports.init = async () => {
     await sequelize.authenticate();
     await Article.sync({ force: true });
     articlesToSave.forEach(async (a) => await Article.create(a));
+    await User.sync({ force: true });
   } catch (error) {
     console.log('init()', error);
   }
