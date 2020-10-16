@@ -15,9 +15,20 @@ module.exports = (app, sequelize) => {
     });
 
     app.post('/login', async (req, res) => {
-        const { name, password } = req.body;
-        res.send( await sequelize.login({ name, password }) );
+        try {
+            const { name, password } = req.body;
+            res.send( await sequelize.login({ name, password }) );
+        } catch (error) {
+            res.status(401);
+            res.send({ message: error.message });
+        }
     });
 
+    app.post('/auth', async (req, res) => {
+        const jwtUtil = require('./../jwtUtil');
+        const { token } = req.body;
+        
+        res.send(jwtUtil.verifyJwt(token).isValid);
+    });
 
 };
