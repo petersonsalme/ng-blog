@@ -1,0 +1,2 @@
+GET http://localhost:8000/dashboard/overview
+Authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoicGV0ZXJzb24iLCJpYXQiOjE2MDI4NTQ1ODYsImV4cCI6MTYwMjg5Nzc4Nn0.apDDoAEZdns1qzCr7QG4-cPJQ6-qxCoFyKEghQK6kCDGsKPOhT6DDSjvtwy2_6eh-lANNmKtMB8LfqhvOOqZRA
