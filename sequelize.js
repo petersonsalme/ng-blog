@@ -195,6 +195,8 @@ module.exports.addUser = async (req) => {
 };
 
 module.exports.login = async (req) => {
+  const jwtUtil = require('./jwtUtil');
+
   const user = await User.findOne({
     where: { name: req.name } 
   });
@@ -202,12 +204,23 @@ module.exports.login = async (req) => {
   if (user) {
     const hashPass = crypto.pbkdf2Sync(req.password, user.salt, 1000, 64, 'sha512').toString('hex');
   
-    console.log(hashPass, user.password);
-      
     if (hashPass === user.password) {
-      return user;
+      return { token: jwtUtil.signJwt(user.name) };
     }
   }
 
   return null;
 };
+
+
+// module.exports.init
+// module.exports.getArticles
+// module.exports.getArticleByKey
+// module.exports.getDashboardArticles
+// module.exports.updateArticlePublishState
+// module.exports.getDashboardArticleByKey
+// module.exports.putDashboardArticle
+// module.exports.deleteDashboardArticleById
+// module.exports.createNewDashboardArticle 
+// module.exports.addUser 
+// module.exports.login 
