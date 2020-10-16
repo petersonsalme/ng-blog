@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const crypto = require('crypto');
 
 const sequelize = new Sequelize('ngblog', 'root', 'example', {
   host: 'localhost',
@@ -184,3 +185,29 @@ module.exports.createNewDashboardArticle = async (req) => {
     return null;
   }
 }; 
+
+module.exports.addUser = async (req) => {
+  return User.create({
+    name: req.name.toLowerCase(),
+    password: req.password,
+    salt: req.salt,
+  });
+};
+
+module.exports.login = async (req) => {
+  const user = await User.findOne({
+    where: { name: req.name } 
+  });
+  
+  if (user) {
+    const hashPass = crypto.pbkdf2Sync(req.password, user.salt, 1000, 64, 'sha512').toString('hex');
+  
+    console.log(hashPass, user.password);
+      
+    if (hashPass === user.password) {
+      return user;
+    }
+  }
+
+  return null;
+};

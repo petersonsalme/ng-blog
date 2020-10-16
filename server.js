@@ -13,6 +13,7 @@ app.use(
 
 require('./api/articles')(app, sequelize);
 require('./api/dashboard')(app, sequelize);
+require('./api/user')(app, sequelize);
 
 app.listen(8000, () => {
     console.log('Server started');
