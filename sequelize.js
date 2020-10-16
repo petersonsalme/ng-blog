@@ -209,7 +209,7 @@ module.exports.login = async (req) => {
     }
   }
 
-  return null;
+  throw new Error('Username or Password is wrong.');
 };
 
 
