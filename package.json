@@ -1,0 +1,29 @@
+{
+  "name": "ng-blog-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petersonsalme/ng-blog-server.git"
+  },
+  "author": "Peterson Salme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petersonsalme/ng-blog-server/issues"
+  },
+  "homepage": "https://github.com/petersonsalme/ng-blog-server#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "mariadb": "^2.5.0",
+    "sequelize": "^6.3.5"
+  }
+}
