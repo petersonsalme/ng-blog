@@ -4,7 +4,7 @@ const fs = require('fs');
 module.exports = {
     signJwt: (username) => {
         const payload = { name: username };
-        const privateKey = fs.readFileSync('./private.key', 'utf-8');
+        const privateKey = fs.readFileSync('/run/secrets/private_key', 'utf-8');
         const signOpts = {
             expiresIn: "12h",
             algorithm: "RS256"
@@ -21,7 +21,7 @@ module.exports = {
         };
 
         try {
-            const publicKey = fs.readFileSync('./public.key', 'utf-8');
+            const publicKey = fs.readFileSync('/run/secrets/public_key', 'utf-8');
             const verifyOpts = {
                 expiresIn: "12h",
                 algorithm: "RS256"

@@ -26,6 +26,9 @@ services:
       dockerfile: docker/node/Dockerfile
     environment: 
       GET_HOST_FROM: dns
+    secrets:
+      - public_key
+      - private_key
     ports:
       - 8000:8000
     depends_on: 
@@ -52,6 +55,12 @@ services:
       - nodejs:server
     networks: 
       - blog_net
+
+secrets:
+  public_key:
+    file: docker/secrets/public.key
+  private_key:
+    file: docker/secrets/private.key
 
 networks: 
   blog_net:
