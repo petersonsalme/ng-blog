@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const crypto = require('crypto');
 
 const sequelize = new Sequelize('ngblog', 'root', 'example', {
-  host: 'localhost',
+  host: 'blog-mariadb',
   dialect: 'mariadb',
   port: 3306,
 });
