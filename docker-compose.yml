@@ -29,8 +29,8 @@ services:
     secrets:
       - public_key
       - private_key
-    ports:
-      - 8000:8000
+    # ports:
+    #   - 8000:8000
     depends_on: 
       - mariadb
     links:
