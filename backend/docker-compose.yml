@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+  
+  mariadb:
+    container_name: blog-mariadb
+    image: mariadb
+    hostname: blog-mariadb
+    #restart: always
+    environment:
+      GET_HOST_FROM: dns
+      MYSQL_DATABASE: ngblog
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: example
+    ports: 
+      - 3306:3306
+    networks: 
+      - blog_net
+  
+  nodejs:
+    container_name: blog-server
+    image: petersonsalme/nodejs-blog-server:v1
+    hostname: blog-server
+    build: 
+      context: .
+      dockerfile: docker/node/Dockerfile
+    environment: 
+      GET_HOST_FROM: dns
+    secrets:
+      - public_key
+      - private_key
+    # ports:
+    #   - 8000:8000
+    depends_on: 
+      - mariadb
+    links:
+      - mariadb
+    networks: 
+      - blog_net
+  
+  nginx:
+    container_name: blog-nginx
+    image: petersonsalme/nginx-blog-server:v1
+    hostname: blog-nginx
+    build: 
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    environment: 
+      GET_HOST_FROM: dns
+    ports:
+      - 8080:80
+    depends_on: 
+      - nodejs
+    links:
+      - nodejs:server
+    networks: 
+      - blog_net
+
+secrets:
+  public_key:
+    file: docker/secrets/public.key
+  private_key:
+    file: docker/secrets/private.key
+
+networks: 
+  blog_net:
+    driver: bridge
