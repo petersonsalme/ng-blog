@@ -27,6 +27,8 @@ jobs:
         cd ../backend && npm ci --legacy-peer-deps
       
     - name: Build Project
+      env:
+        NG_CLI_ANALYTICS: false
       run: |
         cd frontend && npm run build --if-present
         cd ../backend && npm run build --if-present
